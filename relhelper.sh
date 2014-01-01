@@ -11,9 +11,9 @@ else
 fi
 
 # Trim up the generated release
-find _rel -name "*~" -type f -print0 | xargs -0 rm -f
-find _rel -name "src" -type d -print0 | xargs -0 rm -fr
-find _rel -name "c_src" -type d -print0 | xargs -0 rm -fr
-find _rel -name "include" -type d -print0 | xargs -0 rm -fr
-find _rel -name "obj" -type d -print0 | xargs -0 rm -fr
+#find _rel -name "*~" -type f -print0 | xargs -0 rm -f
+#find _rel -name "src" -type d -print0 | xargs -0 rm -fr
+#find _rel -name "c_src" -type d -print0 | xargs -0 rm -fr
+#find _rel -name "include" -type d -print0 | xargs -0 rm -fr
+#find _rel -name "obj" -type d -print0 | xargs -0 rm -fr
 
