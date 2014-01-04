@@ -10,14 +10,24 @@
 
 -export([mount/4, remount/2, umount/1]).
 
+%%--------------------------------------------------------------------
+%% @doc Run mount(8) to mount a file system
+%%
+%% This effectively runs the following in the shell:
+%%   mount -t Type -o Options Device Directory
+%%
+%% @end
+%%--------------------------------------------------------------------
 -spec mount(string(), string(), atom(), [atom()]) -> ok | {error, non_neg_integer()}.
 mount(Device, Directory, Type, Options) ->
     Arguments = options_to_args(Options) ++ ["-t", atom_to_list(Type), Device, Directory],
     subprocess:run("mount", Arguments).
 
+%% Remount a file system
+%% Example: remount("/", [rw]).
 -spec remount(string(), [atom()]) -> ok | {error, non_neg_integer()}.
 remount(Directory, Options) ->
-    Arguments = options_to_args(Options) ++ [Directory],
+    Arguments = options_to_args([remount | Options]) ++ [Directory],
     subprocess:run("mount", Arguments).
 
 -spec umount(string()) -> ok | {error, non_neg_integer()}.
