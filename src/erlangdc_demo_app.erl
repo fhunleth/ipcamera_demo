@@ -16,6 +16,9 @@ start(_Type, _Args) ->
     os:cmd("/sbin/ip addr add 192.168.1.40/24 dev eth0"),
     os:cmd("/sbin/ip route add default via 192.168.1.1"),
 
+    % Mount /tmp
+    mount:mount("tmpfs", "/tmp", tmpfs, []),
+
     Dispatch = cowboy_router:compile([
 				      {'_', [
 					     {"/", cowboy_static, {priv_file, erlangdc_demo, "index.html"}},
