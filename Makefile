@@ -9,7 +9,7 @@ all:
 
 relsync:
 	rebar compile
-	../relsync/relsync --destnode erlangdc@nerves --hooks relsync_hooks.erl --cookie erlangdc --sname relsync
+	relsync --destnode erlangdc@nerves --hooks relsync_hooks.erl --cookie erlangdc --sname relsync
 
 burn:
 	sudo env PATH=$(PATH) fwtool -t complete -d $(SDCARD_LOCATION) run _images/bbb.fw
@@ -18,14 +18,14 @@ DEPSOLVER_PLT=$(CURDIR)/.depsolver_plt
 ERLANG_APPS=erts kernel stdlib crypto public_key mnesia ssl
 
 $(DEPSOLVER_PLT):
-		dialyzer --output_plt $(DEPSOLVER_PLT) --build_plt \
-					--apps $(ERLANG_APPS) -r deps
+	dialyzer --output_plt $(DEPSOLVER_PLT) --build_plt \
+			--apps $(ERLANG_APPS) -r deps
 
 dialyzer: $(DEPSOLVER_PLT)
-		dialyzer --plt $(DEPSOLVER_PLT) $(DIALYZER_OPTS) --src src
+	dialyzer --plt $(DEPSOLVER_PLT) $(DIALYZER_OPTS) --src src
 
 typer: $(DEPSOLVER_PLT)
-		typer --plt $(DEPSOLVER_PLT) -r ./src
+	typer --plt $(DEPSOLVER_PLT) -r ./src
 
 clean:
 	rebar clean
