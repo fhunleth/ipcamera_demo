@@ -24,7 +24,7 @@
 
 -module(subprocess).
 
--export([run/1, run/2, run/3]).
+-export([run/1, run/2, run/3, cmdpp/1]).
 
 % Run the specified executable and return ok on success
 -spec run(string()) -> ok | {error, non_neg_integer()}.
@@ -60,3 +60,12 @@ loop_till_done(Port) ->
 	{Port, {exit_status, ExitStatus}} ->
 	    {error, ExitStatus}
     end.
+
+% Run a command using os:cmd/1, but pretty print its output
+% in nice lines instead of one really long string.
+-spec cmdpp(string()) -> ok.
+cmdpp(CmdLine) ->
+    Output = os:cmd(CmdLine),
+    lists:foreach(fun(A) -> io:format("~s~n", [A]) end,
+		  string:tokens(Output, "\n")),
+    ok.
