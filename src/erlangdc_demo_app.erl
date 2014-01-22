@@ -23,12 +23,13 @@ start(_Type, _Args) ->
 				      {'_', [
 					     {"/", cowboy_static, {priv_file, erlangdc_demo, "index.html"}},
 					     {"/websocket", ws_handler, []},
+					     {"/video", video_handler, []},
 					     {"/static/[...]", cowboy_static, {priv_dir, erlangdc_demo, "static"}}
 					    ]}
 				     ]),
     {ok, _} = cowboy:start_http(http, 100, [{port, 8000}],
-				[{env, [{dispatch, Dispatch}]}]),
-    erlangdc_demo_sup:start_link().
+				[{env, [{dispatch, Dispatch}]}]).
+    %erlangdc_demo_sup:start_link().
 
 -spec stop(_) -> ok.
 stop(_State) ->

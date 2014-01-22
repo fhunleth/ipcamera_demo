@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
-    <title>ErlangDC R13B Demo</title>
+    <title>Erlang IP Camera</title>
 
     <!-- jQuery and jQuery Mobile -->
     <link rel="stylesheet" href="static/jquery.mobile-1.3.2.min.css"/>
@@ -48,12 +48,6 @@
           };
       };
 
-     function setRed(value){
-        sendMessage(['setRed', parseInt(value)]);
-      }
-      function setGreen(value){
-        sendMessage(['setGreen', parseInt(value)]);
-      }
       function setYellow(value){
         sendMessage(['setYellow', parseInt(value)]);
       }
@@ -98,47 +92,16 @@
 
   <div data-role="page">
     <div data-theme="a" data-role="header">
-      <h3>ErlangDC R13B Demo</h3>
+      <h3>Erlang IP Camera</h3>
     </div>
     <div id="status"></div>
     <div data-role="content">
-      <div data-role="fieldcontain">
-        <label for="redled">Red LED</label>
-        <select id="redled" name="redled" data-role="slider" value="0"
-	       onChange="setRed(value);">
-          <option value="0">Off</option>
-          <option value="1">On</option>
-        </select>
-      </div>
 
-      <div data-role="fieldcontain">
-        <label for="yellowled">Yellow LED</label>
-        <select id="yellowled" name="yellowled" data-role="slider" value="0"
-	       onChange="setYellow(value);">
-          <option value="0">Off</option>
-          <option value="1">On</option>
-        </select>
-      </div>
+      <img src="/video" />
 
-      <div data-role="fieldcontain">
-        <label for="greenled">Green LED</label>
-        <select id="greenled" name="greenled" data-role="slider" value="0"
-	       onChange="setGreen(value);">
-          <option value="0">Off</option>
-          <option value="1">On</option>
-        </select>
-      </div>
-
-      <div data-role="fieldcontain">
-	<label for="buttonStatus">Button</label>
-	<select id="buttonStatus" name="switch" data-role="slider" value="0">
-	  <option value="0">Not pressed</option>
-	  <option value="1">Pressed</option>
-	</select>
-      </div>
     </div>
     <div data-role="footer" data-position="fixed">
-      <a href="https://github.com/fhunleth/erlangdc_demo">https://github.com/fhunleth/erlangdc_demo.git</a>
+      <a href="https://github.com/fhunleth/ipcamera_demo">https://github.com/fhunleth/ipcamera_demo.git</a>
     </div>
   </div>
 
