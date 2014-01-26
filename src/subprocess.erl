@@ -24,7 +24,7 @@
 
 -module(subprocess).
 
--export([run/1, run/2, run/3, cmdpp/1]).
+-export([run/1, run/2, run/3, cmdpp/1, ps/0]).
 
 % Run the specified executable and return ok on success
 -spec run(string()) -> ok | {error, non_neg_integer()}.
@@ -69,3 +69,24 @@ cmdpp(CmdLine) ->
     lists:foreach(fun(A) -> io:format("~s~n", [A]) end,
 		  string:tokens(Output, "\n")),
     ok.
+
+psstat(PidDir) ->
+    {ok, Fd} = file:open(PidDir ++ "/stat", [read]),
+    {ok, StatLine} = file:read_line(Fd),
+    file:close(Fd),
+    Fields = string:tokens(StatLine, " ()"),
+    { list_to_integer(hd(Fields)),
+      lists:nth(2, Fields) }.
+
+ps() ->
+    {ok, Files} = file:list_dir("/proc"),
+    lists:foldl(fun(Filename, A) ->
+			try list_to_integer(Filename) of
+			    _LinuxPid ->
+				[psstat("/proc/" ++ Filename)|A]
+			catch
+			    error:_ -> A
+			end
+		end,
+		[],
+		Files).
