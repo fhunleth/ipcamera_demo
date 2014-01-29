@@ -27,10 +27,14 @@ start(_Type, _Args) ->
 					     {"/static/[...]", cowboy_static, {priv_dir, erlangdc_demo, "static"}}
 					    ]}
 				     ]),
-    {ok, _} = cowboy:start_http(http, 100, [{port, 8000}],
-				[{env, [{dispatch, Dispatch}]}]).
-    %erlangdc_demo_sup:start_link().
+    {ok, _} = cowboy:start_http(http, 100, [{port, 80}],
+				[{env, [{dispatch, Dispatch}]}]),
+
+    % Even though we don't need anything besides cowboy, we still
+    % need to start a supervisor or application:stop/1 will hang.
+    erlangdc_demo_sup:start_link().
 
 -spec stop(_) -> ok.
 stop(_State) ->
-    cowboy:stop_listener(http).
+    cowboy:stop_listener(http),
+    ok.

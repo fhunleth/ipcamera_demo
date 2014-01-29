@@ -14,13 +14,12 @@ send_pictures(Req) ->
     ok = cowboy_req:chunk(Msg, Req),
     send_pictures(Req).
 
-handle(Req, State) ->
+handle(Req, _State) ->
     {ok, Req2} = cowboy_req:chunked_reply(200,
 					  [{<<"MIME-Version">>, <<"1.0">>},
 					   {<<"content-type">>, <<"multipart/x-mixed-replace; boundary=foofoo">>}],
 					  Req),
-    send_pictures(Req2),
-    {ok, Req2, State}.
+    send_pictures(Req2).
 
 terminate(_Reason, _Req, _State) ->
 	ok.
