@@ -7,7 +7,7 @@ presync() ->
 
     % Stop the application if it's running so that
     % we can update the ports..
-    application:stop(erlangdc_demo),
+    application:stop(ipcamera_demo),
 
     % Mount read-write so that we can update files
     mount:remount("/", [rw]).
@@ -24,4 +24,4 @@ postsync() ->
     mount:remount("/", [ro]),
 
     % Start everything going again.
-    application:start(erlangdc_demo).
+    application:start(ipcamera_demo).

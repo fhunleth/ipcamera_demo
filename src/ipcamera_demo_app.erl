@@ -1,7 +1,5 @@
-%% Feel free to use, reuse and abuse the code in this file.
-
 %% @private
--module(erlangdc_demo_app).
+-module(ipcamera_demo_app).
 -behaviour(application).
 
 %% API.
@@ -21,10 +19,10 @@ start(_Type, _Args) ->
 
     Dispatch = cowboy_router:compile([
 				      {'_', [
-					     {"/", cowboy_static, {priv_file, erlangdc_demo, "index.html"}},
+					     {"/", cowboy_static, {priv_file, ipcamera_demo, "index.html"}},
 					     {"/websocket", ws_handler, []},
 					     {"/video", video_handler, []},
-					     {"/static/[...]", cowboy_static, {priv_dir, erlangdc_demo, "static"}}
+					     {"/static/[...]", cowboy_static, {priv_dir, ipcamera_demo, "static"}}
 					    ]}
 				     ]),
     {ok, _} = cowboy:start_http(http, 100, [{port, 80}],
@@ -32,7 +30,7 @@ start(_Type, _Args) ->
 
     % Even though we don't need anything besides cowboy, we still
     % need to start a supervisor or application:stop/1 will hang.
-    erlangdc_demo_sup:start_link().
+    ipcamera_demo_sup:start_link().
 
 -spec stop(_) -> ok.
 stop(_State) ->

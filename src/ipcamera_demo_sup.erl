@@ -1,7 +1,5 @@
-%% Feel free to use, reuse and abuse the code in this file.
-
 %% @private
--module(erlangdc_demo_sup).
+-module(ipcamera_demo_sup).
 -behaviour(supervisor).
 
 %% API.

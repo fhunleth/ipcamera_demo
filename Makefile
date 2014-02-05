@@ -9,7 +9,7 @@ all:
 
 relsync:
 	rebar compile
-	relsync --destnode erlangdc@nerves --hooks relsync_hooks.erl --cookie erlangdc --sname relsync
+	relsync --destnode ipcamera@nerves --hooks relsync_hooks.erl --cookie democookie --sname relsync
 
 burn:
 	sudo env PATH=$(PATH) fwtool -t complete -d $(SDCARD_LOCATION) run _images/bbb.fw

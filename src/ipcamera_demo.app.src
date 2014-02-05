@@ -1,5 +1,5 @@
 %% -*- mode: Erlang; fill-column: 80; comment-column: 75; -*-
-{application, erlangdc_demo,
+{application, ipcamera_demo,
  [
   {description, "Beaglebone IP Camera Demo."},
   {vsn, "1"},
@@ -11,6 +11,6 @@
 		  jsx,
 		  erlang_ale
 		 ]},
-  {mod, {erlangdc_demo_app, []}},
+  {mod, {ipcamera_demo_app, []}},
   {env, []}
  ]}.
