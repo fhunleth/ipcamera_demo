@@ -9,7 +9,8 @@
 		  stdlib,
 		  cowboy,
 		  jsx,
-		  erlang_ale
+		  erlang_ale,
+		  nerves_utils
 		 ]},
   {mod, {ipcamera_demo_app, []}},
   {env, []}
