@@ -7,10 +7,9 @@ presync() ->
 
     % Stop the application if it's running so that
     % we can update the ports..
-    application:stop(ipcamera_demo),
+    application:stop(troodon_cam),
+    application:stop(ipcamera_demo).
 
-    % Mount read-write so that we can update files
-    mount:remount("/", [rw]).
 
 postsync() ->
     io:format("Postsync: restarting...~n"),
@@ -19,9 +18,6 @@ postsync() ->
     % Currently, it doesn't know when it is being run as root.
     %file:change_mode("/srv/erlang/lib/procket-0.4.3/priv/procket", 8#4750),
 
-    % Remount as read-only so that the system
-    % is like it normally is.
-    mount:remount("/", [ro]),
-
     % Start everything going again.
+    application:start(troodon_cam),
     application:start(ipcamera_demo).
