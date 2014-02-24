@@ -29,7 +29,9 @@ send_remaining_pictures(Req) ->
 
 handle(Req, _State) ->
     {ok, Req2} = cowboy_req:chunked_reply(200,
-					  [{<<"MIME-Version">>, <<"1.0">>},
+					  [{<<"connection">>, <<"close">>},
+					   {<<"Cache-Control">>, <<"no-cache">>},
+					   {<<"MIME-Version">>, <<"1.0">>},
 					   {<<"content-type">>, <<"multipart/x-mixed-replace; boundary=foofoo">>}],
 					  Req),
     send_pictures(Req2).
